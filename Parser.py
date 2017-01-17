@@ -5,13 +5,24 @@ while run != 5:
     run = run +1
     clauses = 0
     literals = 0
+    current = []
     names = []
     for i in range (0,len(text)):
         if text[i]=="(":
             clauses += 1
-    for l in range (0,len(text)):
-        if text[l].isalpha() and text[l] not in names:
-            names.append( text[l])
+            current = []
+        
+        if text[i] != ")":
+                current.append(text[i])
+        
+        else:
+            current.append(text[i])
+            print ''.join(current)
+            
+                
+            
+        if text[i].isalpha() and text[i] not in names:
+            names.append( text[i])
             literals += 1
             
 
