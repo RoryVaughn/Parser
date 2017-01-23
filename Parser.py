@@ -1,12 +1,14 @@
 f = open("CNF.txt", "r")
 run = 0
-a = 1
-b = 1
-c = 1
-d = 1
-e = 1
-g = 1
-h = 1
+a = 0
+b = 0
+c = 0
+d = 0
+e = 0
+g = 0
+h = 0
+true = "1"
+false = "0"
 while run != 5:
     text = f.readline()
     run = run +1
@@ -25,8 +27,14 @@ while run != 5:
         
         if text[i] != ")":
             current.append(text[i])
-            if text[i].isalpha():
-                solve.append(text[i])
+            if text[i - 1] == "!":
+                if eval(text[i]) == 1:
+                    solve.append(false)
+                else:
+                    solve.append(true)
+            else:
+                if text[i].isalpha():
+                    solve.append(text[i])
 
                     
                     
@@ -34,18 +42,19 @@ while run != 5:
             
         else:
             current.append(text[i])
-            
-            print (" + ".join(solve))
             for x in range (0,len(solve)):
                 if solve[x].isalpha():
                     count += 1
-            if eval(" + ".join(solve)) == count:
-                clauseSolve = 1
-            print ("this clause is", clauseSolve)
+            if eval(" + ".join(solve)) >= 1:
+                clauseSolve = "true"
+            else:
+                clauseSolve = "false"
+            print "This clause is", clauseSolve
 
-            print ("number of true literals", eval (" + ".join(solve)))
+            print "number of true literals -", eval (" + ".join(solve))
             
             print ''.join(current)
+            print " "
             
                 
             
