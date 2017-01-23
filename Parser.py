@@ -34,17 +34,16 @@ while run != 5:
             
         else:
             current.append(text[i])
+            
             print (" + ".join(solve))
             for x in range (0,len(solve)):
                 if solve[x].isalpha():
                     count += 1
-            if count%2 == 0 and eval(" + ".join(solve)) == count:
+            if eval(" + ".join(solve)) == count:
                 clauseSolve = 1
             print ("this clause is", clauseSolve)
-                
-                
 
-            print eval (" + ".join(solve))
+            print ("number of true literals", eval (" + ".join(solve)))
             
             print ''.join(current)
             
