@@ -89,9 +89,13 @@ while run != 5:
                         solve.append(false)
                     else:
                         solve.append(true)
-                else:
-                    if text[i].isalpha():
-                        solve.append(text[i])
+                
+                if text[i].isalpha():
+                    solve.append(text[i])
+                    ##gets the unique literalls of each expression
+                    if text[i] not in names:
+                        names.append(text[i])
+                        literals += 1
             ## evaluates truthfulness of the expression as well as fitness
             else:
                 current.append(text[i])
@@ -108,30 +112,29 @@ while run != 5:
                 print "number of true literals -", eval (" + ".join(solve))
                 print " "
     ##Genetic mutation
-                if fitness/clauses >= .7:
-                    for j in range (0,len(chromosomes)):
-                        rando = random.randint(0, 10)
-                        if rando >= 7:
-                            chromosomes[j] = random.randint(0, 1)
-                elif fitness/clauses >= .5:
-                    for j in range (0,len(chromosomes)):
-                        rando = random.randint(0, 10)
-                        if rando >= 5:
-                            chromosomes[j] = random.randint(0, 1)
-                elif fitness/clauses >= .3:
-                    for j in range (0,len(chromosomes)):
-                        rando = random.randint(0, 10)
-                        if rando >= 3:
-                            chromosomes[j] = random.randint(0, 1)
-                else:
-                    for j in range (0,len(chromosomes)):
-                        rando = random.randint(0, 10)
-                        if rando >= 2:
-                            chromosomes[j] = random.randint(0, 1)
-            ##checks literals in the clause
-            if text[i].isalpha() and text[i] not in names:
-                names.append( text[i])
-                literals += 1
+        names.sort()
+                
+        if fitness/clauses >= .7:
+            for j in range (0,len(chromosomes)):
+                rando = random.randint(0, 10)
+                if rando >= 7:
+                    chromosomes[j] = random.randint(0, 1)
+        elif fitness/clauses >= .5:
+            for j in range (0,len(chromosomes)):
+                rando = random.randint(0, 10)
+                if rando >= 5:
+                    chromosomes[j] = random.randint(0, 1)
+        elif fitness/clauses >= .3:
+            for j in range (0,len(chromosomes)):
+                rando = random.randint(0, 10)
+                if rando >= 3:
+                    chromosomes[j] = random.randint(0, 1)
+        else:
+            for j in range (0,len(chromosomes)):
+                rando = random.randint(0, 10)
+                if rando >= 2:
+                    chromosomes[j] = random.randint(0, 1)
+
         ##prints info about the full expression
         print(text)
         print "The fitness is",fitness, "out of",clauses, "for this expression."
@@ -145,7 +148,6 @@ while run != 5:
         print "The used literals are ",names
         print "_________________________________________________________________"
         print "_________________________________________________________________"
-        print chromosomes
         print "The current generation is ",generation
         generation += 1
         ##delta time
